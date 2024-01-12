@@ -1,0 +1,91 @@
+/* padding for all nuxtpages */
+.nuxtPageContainer {
+    padding-top: 110px !important;
+    padding-bottom: 110px !important;
+}
+
+/* navbar padding along x-axis */
+.navPadding {
+    padding-left: 12px;
+    padding-right: 12px;
+}
+
+.navZIndex {
+    z-index: 5;
+}
+
+/* Google Play Store image width */
+.playStoreLogo {
+    width: 150px;
+}
+
+/* showing active navlinks and on hover */
+.active,
+li:hover {
+    font-weight: bolder;
+}
+
+/* for images to cover size */
+.randomImg {
+    object-fit: cover;
+}
+
+/* details page */
+.verticalRow {
+    height: 28px;
+}
+
+.top-text {
+    margin-bottom: 0.2rem;
+}
+
+.details-star {
+    font-size: 0.7rem;
+}
+
+.modal-stars:hover {
+    scale: 1.1;
+    cursor: pointer;
+}
+
+/* media query for responsivenes of details apps */
+@media (max-width:576px) {
+    .topHeading {
+        font-size: 24px;
+    }
+
+    .detailsPara {
+        font-size: 14px;
+    }
+}
+
+/* media query for responsivenes of details app image */
+.appDetailImg {
+    height: 280px;
+    width: 280px;
+    border-radius:48px
+}
+@media (max-width:1200px) {
+    .appDetailImg {
+        height: 200px;
+        width: 200px;
+    }
+}
+@media (max-width: 768px) {
+    .appDetailImg {
+        height: 80px;
+        width: 80px;
+        border-radius: 15px;
+    }
+}
+
+/* header shadow */
+.header-shadow {
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+/* homepage */
+.homeImg {
+    height: 485px;
+    object-fit: cover;
+}

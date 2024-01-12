@@ -1,0 +1,1270 @@
+{
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "swagger": "2.0",
+  "info": {
+    "title": "Golang API.",
+    "version": "0.0.1-alpha"
+  },
+  "basePath": "/api/v1",
+  "paths": {
+    "/app/{appName}/reviews": {
+      "get": {
+        "schemes": [
+          "http",
+          "https"
+        ],
+        "tags": [
+          "Reviews"
+        ],
+        "summary": "List review details with pagination when query page and per_page is passed, otherwise displays all reviews associated with app.",
+        "operationId": "RequestListReviews",
+        "parameters": [
+          {
+            "type": "string",
+            "x-go-name": "AppName",
+            "name": "appName",
+            "in": "path",
+            "required": true
+          },
+          {
+            "type": "integer",
+            "format": "int64",
+            "x-go-name": "Page",
+            "name": "page",
+            "in": "query"
+          },
+          {
+            "type": "integer",
+            "format": "int64",
+            "x-go-name": "Per_Page",
+            "name": "per_page",
+            "in": "query"
+          }
+        ],
+        "responses": {
+          "200": {
+            "$ref": "#/responses/ResponseListReviews"
+          },
+          "400": {
+            "$ref": "#/responses/GenericResFailBadRequest"
+          },
+          "500": {
+            "$ref": "#/responses/GenericResError"
+          }
+        }
+      },
+      "post": {
+        "consumes": [
+          "application/json"
+        ],
+        "schemes": [
+          "http",
+          "https"
+        ],
+        "tags": [
+          "Reviews"
+        ],
+        "summary": "Insert a review.",
+        "operationId": "RequestCreateReview",
+        "parameters": [
+          {
+            "type": "string",
+            "x-go-name": "AppName",
+            "name": "appName",
+            "in": "path",
+            "required": true
+          },
+          {
+            "x-go-name": "Body",
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "type": "object",
+              "properties": {
+                "sentiment": {
+                  "type": "string",
+                  "x-go-name": "Sentiment"
+                },
+                "translatedReview": {
+                  "type": "string",
+                  "x-go-name": "TranslatedReview"
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "$ref": "#/responses/ResponseCreateReview"
+          },
+          "400": {
+            "$ref": "#/responses/GenericResFailBadRequest"
+          },
+          "500": {
+            "$ref": "#/responses/GenericResError"
+          }
+        }
+      }
+    },
+    "/apps": {
+      "get": {
+        "schemes": [
+          "http",
+          "https"
+        ],
+        "tags": [
+          "Apps"
+        ],
+        "summary": "List app details with pagination.",
+        "operationId": "RequestListApps",
+        "parameters": [
+          {
+            "type": "integer",
+            "format": "int64",
+            "x-go-name": "Page",
+            "name": "page",
+            "in": "query"
+          },
+          {
+            "type": "integer",
+            "format": "int64",
+            "x-go-name": "Per_Page",
+            "name": "per_page",
+            "in": "query"
+          },
+          {
+            "type": "string",
+            "x-go-name": "Type",
+            "name": "type",
+            "in": "query"
+          },
+          {
+            "type": "string",
+            "x-go-name": "Category",
+            "name": "category",
+            "in": "query"
+          },
+          {
+            "type": "string",
+            "x-go-name": "Search",
+            "name": "search",
+            "in": "query"
+          }
+        ],
+        "responses": {
+          "200": {
+            "$ref": "#/responses/ResponseListApps"
+          },
+          "400": {
+            "$ref": "#/responses/GenericResFailBadRequest"
+          },
+          "500": {
+            "$ref": "#/responses/GenericResError"
+          }
+        }
+      },
+      "post": {
+        "consumes": [
+          "application/json"
+        ],
+        "schemes": [
+          "http",
+          "https"
+        ],
+        "tags": [
+          "Apps"
+        ],
+        "summary": "Insert an app.",
+        "operationId": "RequestCreateApp",
+        "parameters": [
+          {
+            "x-go-name": "Body",
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "type": "object",
+              "properties": {
+                "androidVer": {
+                  "type": "string",
+                  "x-go-name": "AndroidVersion"
+                },
+                "app": {
+                  "type": "string",
+                  "x-go-name": "AppName"
+                },
+                "category": {
+                  "type": "string",
+                  "x-go-name": "Category"
+                },
+                "contentRating": {
+                  "type": "string",
+                  "x-go-name": "ContentRating"
+                },
+                "currentVer": {
+                  "type": "string",
+                  "x-go-name": "CurrentVersion"
+                },
+                "generes": {
+                  "type": "string",
+                  "x-go-name": "Generes"
+                },
+                "installs": {
+                  "type": "string",
+                  "x-go-name": "Installs"
+                },
+                "lastUpdated": {
+                  "type": "string",
+                  "x-go-name": "LastUpdated"
+                },
+                "price": {
+                  "type": "string",
+                  "x-go-name": "Price"
+                },
+                "rating": {
+                  "type": "string",
+                  "x-go-name": "Rating"
+                },
+                "reviews": {
+                  "type": "string",
+                  "x-go-name": "Reviews"
+                },
+                "size": {
+                  "type": "string",
+                  "x-go-name": "Size"
+                },
+                "type": {
+                  "type": "string",
+                  "x-go-name": "Types"
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "$ref": "#/responses/ResponseCreateApp"
+          },
+          "400": {
+            "$ref": "#/responses/GenericResFailBadRequest"
+          },
+          "500": {
+            "$ref": "#/responses/GenericResError"
+          }
+        }
+      }
+    },
+    "/apps/category": {
+      "get": {
+        "schemes": [
+          "http",
+          "https"
+        ],
+        "tags": [
+          "Category"
+        ],
+        "summary": "List categories.",
+        "operationId": "RequestListCategory",
+        "responses": {
+          "200": {
+            "$ref": "#/responses/ResponseListCategory"
+          },
+          "500": {
+            "$ref": "#/responses/GenericResError"
+          }
+        }
+      }
+    },
+    "/apps/{appId}": {
+      "get": {
+        "schemes": [
+          "http",
+          "https"
+        ],
+        "tags": [
+          "Apps"
+        ],
+        "summary": "Get an app.",
+        "operationId": "RequestGetApp",
+        "parameters": [
+          {
+            "type": "string",
+            "x-go-name": "AppId",
+            "name": "appId",
+            "in": "path",
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "$ref": "#/responses/ResponseGetApp"
+          },
+          "404": {
+            "$ref": "#/responses/GenericResFailNotFound"
+          },
+          "500": {
+            "$ref": "#/responses/GenericResError"
+          }
+        }
+      },
+      "put": {
+        "consumes": [
+          "application/json"
+        ],
+        "schemes": [
+          "http",
+          "https"
+        ],
+        "tags": [
+          "Apps"
+        ],
+        "summary": "Update an app.",
+        "operationId": "RequestUpdateApp",
+        "parameters": [
+          {
+            "type": "string",
+            "x-go-name": "AppId",
+            "name": "appId",
+            "in": "path",
+            "required": true
+          },
+          {
+            "x-go-name": "Body",
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "type": "object",
+              "properties": {
+                "androidVer": {
+                  "type": "string",
+                  "x-go-name": "AndroidVersion"
+                },
+                "app": {
+                  "type": "string",
+                  "x-go-name": "AppName"
+                },
+                "category": {
+                  "type": "string",
+                  "x-go-name": "Category"
+                },
+                "contentRating": {
+                  "type": "string",
+                  "x-go-name": "ContentRating"
+                },
+                "currentVer": {
+                  "type": "string",
+                  "x-go-name": "CurrentVersion"
+                },
+                "generes": {
+                  "type": "string",
+                  "x-go-name": "Generes"
+                },
+                "installs": {
+                  "type": "string",
+                  "x-go-name": "Installs"
+                },
+                "lastUpdated": {
+                  "type": "string",
+                  "x-go-name": "LastUpdated"
+                },
+                "price": {
+                  "type": "string",
+                  "x-go-name": "Price"
+                },
+                "rating": {
+                  "type": "string",
+                  "x-go-name": "Rating"
+                },
+                "reviews": {
+                  "type": "string",
+                  "x-go-name": "Reviews"
+                },
+                "size": {
+                  "type": "string",
+                  "x-go-name": "Size"
+                },
+                "type": {
+                  "type": "string",
+                  "x-go-name": "Types"
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "$ref": "#/responses/ResponseUpdateApp"
+          },
+          "400": {
+            "$ref": "#/responses/GenericResFailBadRequest"
+          },
+          "404": {
+            "$ref": "#/responses/GenericResFailNotFound"
+          },
+          "500": {
+            "$ref": "#/responses/GenericResError"
+          }
+        }
+      },
+      "delete": {
+        "schemes": [
+          "http",
+          "https"
+        ],
+        "tags": [
+          "Apps"
+        ],
+        "summary": "Delete an app.",
+        "operationId": "RequestDeleteApp",
+        "parameters": [
+          {
+            "type": "string",
+            "x-go-name": "AppId",
+            "name": "appId",
+            "in": "path",
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "$ref": "#/responses/ResponseDeleteApp"
+          },
+          "500": {
+            "$ref": "#/responses/GenericResError"
+          }
+        }
+      }
+    },
+    "/healthz": {
+      "get": {
+        "description": "Overall health check",
+        "produces": [
+          "application/json"
+        ],
+        "tags": [
+          "Healthcheck"
+        ],
+        "summary": "Overall health check",
+        "operationId": "overallHealthCheck",
+        "responses": {
+          "200": {
+            "$ref": "#/responses/GenericResOk"
+          },
+          "500": {
+            "$ref": "#/responses/GenericResError"
+          }
+        }
+      }
+    },
+    "/healthz/db": {
+      "get": {
+        "description": "Database health check",
+        "produces": [
+          "application/json"
+        ],
+        "tags": [
+          "Healthcheck"
+        ],
+        "summary": "Database health check",
+        "operationId": "dbHealthCheck",
+        "responses": {
+          "200": {
+            "$ref": "#/responses/GenericResOk"
+          },
+          "500": {
+            "$ref": "#/responses/GenericResError"
+          }
+        }
+      }
+    },
+    "/login": {
+      "post": {
+        "consumes": [
+          "application/json"
+        ],
+        "schemes": [
+          "http",
+          "https"
+        ],
+        "tags": [
+          "Auth"
+        ],
+        "summary": "Authenticate user with email and password.",
+        "operationId": "RequestAuthnUser",
+        "parameters": [
+          {
+            "name": "Body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "type": "object",
+              "properties": {
+                "email": {
+                  "type": "string",
+                  "x-go-name": "Email"
+                },
+                "password": {
+                  "type": "string",
+                  "x-go-name": "Password"
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "$ref": "#/responses/ResponseAuthnUser"
+          },
+          "400": {
+            "$ref": "#/responses/GenericResFailBadRequest"
+          },
+          "401": {
+            "$ref": "#/responses/ResForbiddenRequest"
+          },
+          "500": {
+            "$ref": "#/responses/GenericResError"
+          }
+        }
+      }
+    },
+    "/metrics": {
+      "get": {
+        "description": "Prometheus metrics endpoint",
+        "produces": [
+          "text/plain"
+        ],
+        "tags": [
+          "Metrics"
+        ],
+        "summary": "Prometheus metrics endpoint",
+        "operationId": "ReqMetrics"
+      }
+    },
+    "/users": {
+      "post": {
+        "consumes": [
+          "application/json"
+        ],
+        "schemes": [
+          "http",
+          "https"
+        ],
+        "tags": [
+          "Users"
+        ],
+        "summary": "Register a user.",
+        "operationId": "RequestCreateUser",
+        "parameters": [
+          {
+            "name": "Body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "type": "object",
+              "properties": {
+                "email": {
+                  "type": "string",
+                  "x-go-name": "Email"
+                },
+                "first_name": {
+                  "type": "string",
+                  "x-go-name": "FirstName"
+                },
+                "last_name": {
+                  "type": "string",
+                  "x-go-name": "LastName"
+                },
+                "password": {
+                  "type": "string",
+                  "x-go-name": "Password"
+                },
+                "roles": {
+                  "type": "string",
+                  "x-go-name": "Roles"
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "$ref": "#/responses/ResponseCreateUser"
+          },
+          "400": {
+            "$ref": "#/responses/GenericResFailBadRequest"
+          },
+          "500": {
+            "$ref": "#/responses/GenericResError"
+          }
+        }
+      }
+    },
+    "/users/{userId}": {
+      "get": {
+        "consumes": [
+          "application/json"
+        ],
+        "schemes": [
+          "http",
+          "https"
+        ],
+        "tags": [
+          "Users"
+        ],
+        "summary": "Get a user.",
+        "operationId": "RequestGetUser",
+        "parameters": [
+          {
+            "type": "string",
+            "x-go-name": "UserId",
+            "name": "userId",
+            "in": "path",
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "$ref": "#/responses/ResponseGetUser"
+          },
+          "400": {
+            "$ref": "#/responses/GenericResFailNotFound"
+          },
+          "500": {
+            "$ref": "#/responses/GenericResError"
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "AppsInfo": {
+      "type": "object",
+      "properties": {
+        "androidVer": {
+          "type": "string",
+          "x-go-name": "AndroidVersion"
+        },
+        "app": {
+          "type": "string",
+          "x-go-name": "AppName"
+        },
+        "category": {
+          "type": "string",
+          "x-go-name": "Category"
+        },
+        "contentRating": {
+          "type": "string",
+          "x-go-name": "ContentRating"
+        },
+        "createdAt": {
+          "type": "string",
+          "format": "date-time",
+          "x-go-name": "CreatedAt"
+        },
+        "currentVer": {
+          "type": "string",
+          "x-go-name": "CurrentVersion"
+        },
+        "deletedAt": {
+          "type": "string",
+          "format": "date-time",
+          "x-go-name": "DeletedAt"
+        },
+        "generes": {
+          "type": "string",
+          "x-go-name": "Generes"
+        },
+        "id": {
+          "type": "integer",
+          "format": "int64",
+          "x-go-name": "Id"
+        },
+        "installs": {
+          "type": "string",
+          "x-go-name": "Installs"
+        },
+        "lastUpdated": {
+          "type": "string",
+          "x-go-name": "LastUpdated"
+        },
+        "price": {
+          "type": "string",
+          "x-go-name": "Price"
+        },
+        "rating": {
+          "type": "string",
+          "x-go-name": "Rating"
+        },
+        "reviews": {
+          "type": "string",
+          "x-go-name": "Reviews"
+        },
+        "size": {
+          "type": "string",
+          "x-go-name": "Size"
+        },
+        "type": {
+          "type": "string",
+          "x-go-name": "Types"
+        },
+        "updatedAt": {
+          "type": "string",
+          "format": "date-time",
+          "x-go-name": "UpdatedAt"
+        }
+      },
+      "x-go-package": "github.com/Improwised/devempire-ridham-parmar-backend/models"
+    },
+    "ResCategory": {
+      "type": "object",
+      "properties": {
+        "category": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "x-go-name": "Category"
+        }
+      },
+      "x-go-package": "github.com/Improwised/devempire-ridham-parmar-backend/pkg/response"
+    },
+    "ResData": {
+      "type": "object",
+      "properties": {
+        "apps": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/AppsInfo"
+          },
+          "x-go-name": "Apps"
+        },
+        "pagination": {
+          "$ref": "#/definitions/ResPagination"
+        }
+      },
+      "x-go-package": "github.com/Improwised/devempire-ridham-parmar-backend/pkg/response"
+    },
+    "ResPagination": {
+      "description": "All response sturcts\nResponse struct have Res prefix",
+      "type": "object",
+      "properties": {
+        "currentPage": {
+          "type": "integer",
+          "format": "int64",
+          "x-go-name": "CurrentPage"
+        },
+        "perPage": {
+          "type": "integer",
+          "format": "int64",
+          "x-go-name": "PerPage"
+        },
+        "totalPages": {
+          "type": "integer",
+          "format": "int64",
+          "x-go-name": "TotalPages"
+        },
+        "totalRecords": {
+          "type": "integer",
+          "format": "int64",
+          "x-go-name": "TotalRecords"
+        }
+      },
+      "x-go-package": "github.com/Improwised/devempire-ridham-parmar-backend/pkg/response"
+    },
+    "ResReview": {
+      "type": "object",
+      "properties": {
+        "pagination": {
+          "$ref": "#/definitions/ResPagination"
+        },
+        "reviews": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ReviewInfo"
+          },
+          "x-go-name": "Reviews"
+        }
+      },
+      "x-go-package": "github.com/Improwised/devempire-ridham-parmar-backend/pkg/response"
+    },
+    "ReviewInfo": {
+      "type": "object",
+      "properties": {
+        "app": {
+          "type": "string",
+          "x-go-name": "AppName"
+        },
+        "createdAt": {
+          "type": "string",
+          "format": "date-time",
+          "x-go-name": "CreatedAt"
+        },
+        "deletedAt": {
+          "type": "string",
+          "format": "date-time",
+          "x-go-name": "DeletedAt"
+        },
+        "id": {
+          "type": "integer",
+          "format": "int64",
+          "x-go-name": "Id"
+        },
+        "sentiment": {
+          "type": "string",
+          "x-go-name": "Sentiment"
+        },
+        "sentimentPolarity": {
+          "type": "string",
+          "x-go-name": "SentimentPolarity"
+        },
+        "sentimentSubjectivity": {
+          "type": "string",
+          "x-go-name": "SentimentSubjectivity"
+        },
+        "translatedReview": {
+          "type": "string",
+          "x-go-name": "TranslatedReview"
+        },
+        "updatedAt": {
+          "type": "string",
+          "format": "date-time",
+          "x-go-name": "UpdatedAt"
+        }
+      },
+      "x-go-package": "github.com/Improwised/devempire-ridham-parmar-backend/models"
+    }
+  },
+  "responses": {
+    "GenericResError": {
+      "description": "Unexpected error occurred",
+      "schema": {
+        "type": "object",
+        "properties": {
+          "data": {
+            "type": "object",
+            "x-go-name": "Data"
+          },
+          "message": {
+            "type": "string",
+            "x-go-name": "Message"
+          },
+          "status": {
+            "type": "string",
+            "enum": [
+              "error"
+            ],
+            "x-go-name": "Status"
+          }
+        }
+      }
+    },
+    "GenericResFailBadRequest": {
+      "description": "Fail due to user invalid input",
+      "schema": {
+        "type": "object",
+        "properties": {
+          "data": {
+            "type": "object",
+            "x-go-name": "Data"
+          },
+          "status": {
+            "type": "string",
+            "enum": [
+              "fail"
+            ],
+            "x-go-name": "Status"
+          }
+        }
+      }
+    },
+    "GenericResFailConflict": {
+      "description": "Server understand request but refuse to authorize it",
+      "schema": {
+        "type": "object",
+        "properties": {
+          "data": {
+            "type": "object",
+            "x-go-name": "Data"
+          },
+          "status": {
+            "type": "string",
+            "enum": [
+              "fail"
+            ],
+            "x-go-name": "Status"
+          }
+        }
+      }
+    },
+    "GenericResFailNotFound": {
+      "description": "Fail due to resource not exists",
+      "schema": {
+        "type": "object",
+        "properties": {
+          "data": {
+            "type": "object",
+            "x-go-name": "Data"
+          },
+          "status": {
+            "type": "string",
+            "enum": [
+              "fail"
+            ],
+            "x-go-name": "Status"
+          }
+        }
+      }
+    },
+    "GenericResFailUnprocessableEntity": {
+      "description": "Fail due to server understand request but unable to process",
+      "schema": {
+        "type": "object",
+        "properties": {
+          "data": {
+            "type": "object",
+            "x-go-name": "Data"
+          },
+          "status": {
+            "type": "string",
+            "enum": [
+              "fail"
+            ],
+            "x-go-name": "Status"
+          }
+        }
+      }
+    },
+    "GenericResOk": {
+      "description": "Response is okay",
+      "schema": {
+        "type": "object",
+        "properties": {
+          "status": {
+            "type": "string",
+            "enum": [
+              "success"
+            ],
+            "x-go-name": "Status"
+          }
+        }
+      }
+    },
+    "ResForbiddenRequest": {
+      "description": "Fail due to user invalid input",
+      "schema": {
+        "type": "object",
+        "properties": {
+          "data": {
+            "type": "object",
+            "x-go-name": "Data"
+          },
+          "status": {
+            "type": "string",
+            "enum": [
+              "fail"
+            ],
+            "x-go-name": "Status"
+          }
+        }
+      }
+    },
+    "ResponseAuthnUser": {
+      "description": "",
+      "schema": {
+        "type": "object",
+        "properties": {
+          "data": {
+            "type": "object",
+            "properties": {
+              "created_at": {
+                "type": "string",
+                "x-go-name": "CreatedAt"
+              },
+              "email": {
+                "type": "string",
+                "x-go-name": "Email"
+              },
+              "first_name": {
+                "type": "string",
+                "x-go-name": "FirstName"
+              },
+              "id": {
+                "type": "string",
+                "x-go-name": "ID"
+              },
+              "last_name": {
+                "type": "string",
+                "x-go-name": "LastName"
+              },
+              "roles": {
+                "type": "string",
+                "x-go-name": "Roles"
+              },
+              "updated_at": {
+                "type": "string",
+                "x-go-name": "UpdatedAt"
+              }
+            },
+            "x-go-name": "Data"
+          },
+          "status": {
+            "type": "string",
+            "enum": [
+              "success"
+            ],
+            "x-go-name": "Status"
+          }
+        }
+      }
+    },
+    "ResponseCreateApp": {
+      "description": "",
+      "schema": {
+        "type": "object",
+        "properties": {
+          "data": {
+            "$ref": "#/definitions/AppsInfo"
+          },
+          "status": {
+            "type": "string",
+            "enum": [
+              "success"
+            ],
+            "x-go-name": "Status"
+          }
+        }
+      }
+    },
+    "ResponseCreateReview": {
+      "description": "",
+      "schema": {
+        "type": "object",
+        "properties": {
+          "data": {
+            "$ref": "#/definitions/ReviewInfo"
+          },
+          "status": {
+            "type": "string",
+            "enum": [
+              "success"
+            ],
+            "x-go-name": "Status"
+          }
+        }
+      }
+    },
+    "ResponseCreateUser": {
+      "description": "",
+      "schema": {
+        "type": "object",
+        "properties": {
+          "data": {
+            "type": "object",
+            "properties": {
+              "created_at": {
+                "type": "string",
+                "x-go-name": "CreatedAt"
+              },
+              "email": {
+                "type": "string",
+                "x-go-name": "Email"
+              },
+              "first_name": {
+                "type": "string",
+                "x-go-name": "FirstName"
+              },
+              "id": {
+                "type": "string",
+                "x-go-name": "ID"
+              },
+              "last_name": {
+                "type": "string",
+                "x-go-name": "LastName"
+              },
+              "roles": {
+                "type": "string",
+                "x-go-name": "Roles"
+              },
+              "updated_at": {
+                "type": "string",
+                "x-go-name": "UpdatedAt"
+              }
+            },
+            "x-go-name": "Data"
+          },
+          "status": {
+            "type": "string",
+            "enum": [
+              "success"
+            ],
+            "x-go-name": "Status"
+          }
+        }
+      }
+    },
+    "ResponseDeleteApp": {
+      "description": "",
+      "schema": {
+        "type": "object",
+        "properties": {
+          "data": {
+            "$ref": "#/definitions/AppsInfo"
+          },
+          "status": {
+            "type": "string",
+            "enum": [
+              "success"
+            ],
+            "x-go-name": "Status"
+          }
+        }
+      }
+    },
+    "ResponseGetApp": {
+      "description": "",
+      "schema": {
+        "type": "object",
+        "properties": {
+          "data": {
+            "$ref": "#/definitions/AppsInfo"
+          },
+          "status": {
+            "type": "string",
+            "enum": [
+              "success"
+            ],
+            "x-go-name": "Status"
+          }
+        }
+      }
+    },
+    "ResponseGetUser": {
+      "description": "",
+      "schema": {
+        "type": "object",
+        "properties": {
+          "data": {
+            "type": "object",
+            "properties": {
+              "created_at": {
+                "type": "string",
+                "x-go-name": "CreatedAt"
+              },
+              "email": {
+                "type": "string",
+                "x-go-name": "Email"
+              },
+              "first_name": {
+                "type": "string",
+                "x-go-name": "FirstName"
+              },
+              "id": {
+                "type": "string",
+                "x-go-name": "ID"
+              },
+              "last_name": {
+                "type": "string",
+                "x-go-name": "LastName"
+              },
+              "roles": {
+                "type": "string",
+                "x-go-name": "Roles"
+              },
+              "updated_at": {
+                "type": "string",
+                "x-go-name": "UpdatedAt"
+              }
+            },
+            "x-go-name": "Data"
+          },
+          "status": {
+            "type": "string",
+            "enum": [
+              "success"
+            ],
+            "x-go-name": "Status"
+          }
+        }
+      }
+    },
+    "ResponseListApps": {
+      "description": "",
+      "schema": {
+        "type": "object",
+        "properties": {
+          "data": {
+            "$ref": "#/definitions/ResData"
+          },
+          "status": {
+            "type": "string",
+            "enum": [
+              "success"
+            ],
+            "x-go-name": "Status"
+          }
+        }
+      }
+    },
+    "ResponseListCategory": {
+      "description": "",
+      "schema": {
+        "type": "object",
+        "properties": {
+          "data": {
+            "$ref": "#/definitions/ResCategory"
+          },
+          "status": {
+            "type": "string",
+            "enum": [
+              "success"
+            ],
+            "x-go-name": "Status"
+          }
+        }
+      }
+    },
+    "ResponseListReviews": {
+      "description": "",
+      "schema": {
+        "type": "object",
+        "properties": {
+          "data": {
+            "$ref": "#/definitions/ResReview"
+          },
+          "status": {
+            "type": "string",
+            "enum": [
+              "success"
+            ],
+            "x-go-name": "Status"
+          }
+        }
+      }
+    },
+    "ResponseUpdateApp": {
+      "description": "",
+      "schema": {
+        "type": "object",
+        "properties": {
+          "data": {
+            "$ref": "#/definitions/AppsInfo"
+          },
+          "status": {
+            "type": "string",
+            "enum": [
+              "success"
+            ],
+            "x-go-name": "Status"
+          }
+        }
+      }
+    }
+  }
+}
