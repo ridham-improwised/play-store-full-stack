@@ -10,9 +10,9 @@ const formData = reactive({
     type: "",
     price: "",
     contentRating: "",
-    genres: "",
-    currentVersion: "",
-    androidVersion: ""
+    generes: "",
+    currentVer: "",
+    androidVer: ""
 });
 
 onMounted(() => {
@@ -30,17 +30,17 @@ async function handleSubmit() {
         return res;
     }
     if (checkInput()) {
-        messages.value.success ? await updateApp(formData, messages.value.success.id) : await addApp(formData) ;
+        messages.value.appDetails ? await updateApp(formData, messages.value.appDetails.data.id) : await addApp(formData) ;
     }
 }
 
-watch(() => [messages.value.success], () => {
-    if (messages.value.success) {
+watch(() => [messages.value.appDetails], () => {
+    if (messages.value.appDetails) {
         ({
-            App: formData.app, Category: formData.category, Size: formData.size, Type: formData.type, Price: formData.price,
-            [`Content Rating`]: formData.contentRating, Genres: formData.genres,
-            [`Current Ver`]: formData.currentVersion, [`Android Ver`]: formData.androidVersion
-        } = messages.value.success)
+            app: formData.app, category: formData.category, size: formData.size, type: formData.type, price: formData.price,
+            contentRating: formData.contentRating, generes: formData.generes,
+            currentVer: formData.currentVer, androidVer: formData.androidVer
+        } = messages.value.appDetails.data)
     }
 }, {immediate: true})
 </script>
@@ -67,13 +67,13 @@ watch(() => [messages.value.success], () => {
                 <FormField label="Content Rating" forId="validationCustom06" v-model.trim="formData.contentRating"
                     placeholder="Everyone/Teen" invalidField="Please provide content rating." />
 
-                <FormField label="Genres" forId="validationCustom07" v-model.trim="formData.genres"
+                <FormField label="Genres" forId="validationCustom07" v-model.trim="formData.generes"
                     placeholder="Social Media" invalidField="Please provide genres." />
 
-                <FormField label="Current Version" forId="validationCustom08" v-model.trim="formData.currentVersion"
+                <FormField label="Current Version" forId="validationCustom08" v-model.trim="formData.currentVer"
                     placeholder="2.0.0" invalidField="Please provide current version." />
 
-                <FormField label="Android Version" forId="validationCustom09" v-model.trim="formData.androidVersion"
+                <FormField label="Android Version" forId="validationCustom09" v-model.trim="formData.androidVer"
                     placeholder="Supported android version" invalidField="Please provide android version." />
 
                 <div class="pt-3 d-flex justify-content-end">

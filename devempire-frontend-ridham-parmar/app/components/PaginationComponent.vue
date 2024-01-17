@@ -1,7 +1,6 @@
 <script setup>
 const route = useRoute() ;
 const props = defineProps(['page', 'pagination', 'navigationPath']);
-console.log("pagination ", props.pagination);
 
 function selectPageHandler(pageNo) {
     let navigateQueryData = {} ;
@@ -28,13 +27,15 @@ function selectPageHandler(pageNo) {
                 </NuxtLink>
             </li>
 
+           <template v-if="pagination.currentPage  <= pagination.totalPages ">
             <li class="page-item" v-for="n in 2" :key="n">
-                <NuxtLink class="page-link" v-if="pagination.currentPage < pagination.totalPages"
-                    :class="{ active: page + (n - 1) === page }" @click="selectPageHandler(page + n - 1)">
+                <NuxtLink class="page-link"
+                    :class="{ active: page + (n - 1) === page}" 
+                    @click="selectPageHandler(page + n - 1)">
                     {{ page + n - 1 }}
                 </NuxtLink>
             </li>
-
+           </template>     
             <li class="page-item">
                 <NuxtLink class="page-link" :class="{ disabled : pagination.currentPage >= pagination.totalPages}"  @click="selectPageHandler(page + 1)">Next
                 </NuxtLink>

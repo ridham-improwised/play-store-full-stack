@@ -1,7 +1,7 @@
 <script setup>
 const props = defineProps(['appsData'])
 const deleteAppId = ref()
-const { getApps, fetchAppsImage } = callApi();
+const { getSpecificApp, fetchAppsImage } = callApi();
 const vImageTag = {
     // mounted: async (el) => {
     //     el.src = await fetchAppsImage(el.alt)
@@ -37,7 +37,7 @@ const vImageTag = {
                                 </div>
                                 <div class="d-flex gap-3">
                                     <NuxtLink :to="`/storeApps/update?app=${apps.app.split(' ').join('.')}`">
-                                        <button type="button" class="btn btn-success" @click="getApps(null, null, apps.id)">
+                                        <button type="button" class="btn btn-success" @click="getSpecificApp(apps.id)">
                                             Update
                                         </button>
                                     </NuxtLink>

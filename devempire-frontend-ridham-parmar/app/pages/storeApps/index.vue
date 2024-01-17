@@ -27,7 +27,7 @@ function fetchApps() {
         Object.assign(options, { type: route.query.type })
     }
     if (route.query.category) {
-        Object.assign(options, { category: route.query.category })
+        Object.assign(options, { category: (route.query.category).replaceAll(' ', '_') })
     }
     if (route.query.search) {
         Object.assign(options, { search: route.query.search })

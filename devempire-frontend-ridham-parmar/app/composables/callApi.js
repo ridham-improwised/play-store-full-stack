@@ -7,13 +7,9 @@ export default function useCallApi() {
 
   // fetch-data
   const fetchData = async (url, options, types = null) => {
-    setEmptyData(true);
-    // console.log("from callapi ", url, options);
-
+    setEmptyData(true)
     const { data, error, pending } = await useFetch(url, options);
-    console.log("data ", data);
-    console.log("error", error);
-    console.log("pending", pending.value);
+
     messages.value.apiError = error.value;
 
     if (types !== "getAppDetail") {
@@ -35,11 +31,13 @@ export default function useCallApi() {
 
   // add-app
   const addApp = async (formData) => {
-    const convertedData = convert(formData);
+    formData.installs = "0";
+    formData.reviews = "0";
+    formData.rating = "0";
     const options = {
       baseURL: baseUrl,
       method: "POST",
-      body: convertedData,
+      body: formData,
       headers: {
         "Content-Type": "application/json",
       },
@@ -55,32 +53,39 @@ export default function useCallApi() {
         ? Object.assign({ page: page }, filterQuery)
         : { page: page },
     };
+
     fetchData(appId ? `/apps/${appId}` : "/apps", options, "get");
   };
+  
+  // getSpecificApp
+  const getSpecificApp = async (appId) => {
+    const options = {
+      baseURL: baseUrl
+    };
+    
+    await fetchData(`/apps/${appId}`, options, "getAppDetail")
+    messages.value.pendingStatus = null;
+  }
 
   //get-category
   const getCategory = async () => {
-    const { data } = await useLazyFetch(baseUrl + "/apps", {
-      transform: (response) => {
-        return response.map((apps) => {
-          return apps.Category;
-        });
-      },
-    });
+    const options = {
+      baseURL: baseUrl
+    };
+    const { data } = await useFetch("/apps/category", options);
     watch(data, () => {
       if (data.value) {
-        messages.value.categories = [...new Set(data.value)];
+        messages.value.categories = data.value.data.category
       }
-    });
+    }, {immediate:true});
   };
 
   //update-app
   const updateApp = async (formData, id) => {
-    const convertedData = convert(formData);
     const options = {
       baseURL: baseUrl,
       method: "PUT",
-      body: convertedData,
+      body: formData,
       headers: {
         "Content-Type": "application/json",
       },
@@ -153,6 +158,7 @@ export default function useCallApi() {
     deleteApp,
     fetchAppsImage,
     fetchAppDetails,
-    addReview
+    addReview,
+    getSpecificApp
   };
 }

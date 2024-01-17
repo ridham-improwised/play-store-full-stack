@@ -21,7 +21,6 @@ watch(() => [messages.value.reviewStatus], () => {
 
 <template>
     <ClientOnly>
-        <!-- {{ messages.appDetails }} -->
         <div class="row flex-column justify-content-center g-0 w-100">
             <div class="col-12 col-lg-10 d-flex flex-column align-self-center gap-5">
                 <MessageDisplay v-if="messages.apiError || messages.reviewStatus" />
